@@ -12,6 +12,8 @@ File: `algorithmia.json`
 
 ## Watson Natural Language Understanding
 
+File: `watson-nlu.json`
+
 ```
 {
   "apikey": "Qynm-JBOd9m7JqEAFSvSt4feydYO4Pt0xYvAfaNEY2LW",
@@ -20,5 +22,16 @@ File: `algorithmia.json`
   "iam_role_crn": "crn:v1:bluemix:public:iam::::serviceRole:Manager",
   "iam_serviceid_crn": "crn:v1:bluemix:public:iam-identity::a/ffcb2c250e19bc335de2e9f1533711c8::serviceid:ServiceId-3b990ca3-62e6-4445-b303-84239f956d01",
   "url": "https://gateway.watsonplatform.net/natural-language-understanding/api"
+}
+```
+
+## Google Search Engine
+
+File: `google-search.json`
+
+```
+{
+  "apiKey": "5d5df15yjbu10RT5RT_354df5dB32"8NFNFHsck",
+  "searchEngineId": "313184513131884374594:5fg2fgdfgvv"
 }
 ```
