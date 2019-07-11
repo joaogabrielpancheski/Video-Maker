@@ -1,3 +1,2 @@
 # video-maker
-
-Projeto open source para fazer vídeos automatizados (Projeto original: @filipedeschamps)
+Projeto open source para fazer vídeos automatizados
