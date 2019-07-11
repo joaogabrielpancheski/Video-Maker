@@ -89,7 +89,7 @@ async function robot() {
       });
     }
 
-    function setGlobalGoogleAuthentication(OAuthClient) {
+    async function setGlobalGoogleAuthentication(OAuthClient) {
       google.options({
         auth: OAuthClient
       });
@@ -105,7 +105,7 @@ async function robot() {
   }
 
   async function uploadVideo(content) {
-    const videoFilePath = "./content/output.avi";
+    const videoFilePath = "./content/output.mp4";
     const videoFileSize = fs.statSync(videoFilePath).size;
     const videoTitle = `${content.prefix} ${content.searchTerm}`;
     const videoTags = [content.searchTerm, ...content.sentences[0].keywords];
