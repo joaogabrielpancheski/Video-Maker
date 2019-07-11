@@ -24,6 +24,7 @@
     "handbrake-js": "^4.0.0",
     "ibm-watson": "^4.2.1",
     "image-downloader": "^3.4.2",
+    "lodash.mergewith": "^4.6.2",
     "readline-sync": "^1.4.9",
     "sbd": "^1.0.15"
   }
