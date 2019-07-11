@@ -35,7 +35,7 @@ async function robot() {
       content.sentences[
         sentenceIndex
       ].images = await fetchGoogleAndReturnImagesLinks(query);
-      ontent.sentences[sentenceIndex].googleSearchQuery = query;
+      content.sentences[sentenceIndex].googleSearchQuery = query;
     }
   }
 
