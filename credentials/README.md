@@ -6,7 +6,7 @@ File: `algorithmia.json`
 
 ```
 {
-  "apiKey": "API_KEY_AQUI"
+  "apiKey": "..."
 }
 ```
 
@@ -31,7 +31,7 @@ File: `google-search.json`
 
 ```
 {
-  "apiKey": "API_KEY_AQUI"
-  "searchEngineId": "ID_MECANISMO_DE_BUSCA"
+  "apiKey": "..."
+  "searchEngineId": "..."
 }
 ```

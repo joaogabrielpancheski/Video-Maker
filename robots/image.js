@@ -1,3 +1,4 @@
+const blackList = require("../content/blackList.json").imagesUrl;
 const imageDownloader = require("image-downloader");
 const google = require("googleapis").google;
 const customSearch = google.customsearch("v1");
@@ -72,6 +73,9 @@ async function robot() {
         try {
           if (content.downloadedImages.includes(imageUrl)) {
             throw new Error("Image already downloaded");
+          }
+          if (blackList.includes(imageUrl)) {
+            throw new Error("Image is on the black list");
           }
 
           await downloadAndSave(imageUrl, `${sentenceIndex}-original.png`);
