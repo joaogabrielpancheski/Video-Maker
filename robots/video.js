@@ -7,6 +7,7 @@ const path = require("path");
 const rootPath = path.resolve(__dirname, "..");
 
 async function robot() {
+  console.log("> [video-robot] Starting...");
   const content = state.load();
 
   await convertAllImages(content);
@@ -138,7 +139,7 @@ async function robot() {
         .write("./content/youtube-thumbnail.jpg", error => {
           if (error) return reject(error);
 
-          console.log("> Creating YouTube thumbnail");
+          console.log("> [video-robot] YouTube thumbnail created");
           resolve();
         });
     });
@@ -169,7 +170,7 @@ async function robot() {
         "output.mp4"
       );
 
-      console.log("> Starting After Effects");
+      console.log("> [video-robot] Starting After Effects");
 
       const aerender = spawn(aerenderFilePath, [
         "-comp",
@@ -185,9 +186,9 @@ async function robot() {
       });
 
       aerender.on("close", () => {
-        console.log("> After Effects closed");
+        console.log("> [video-robot] After Effects closed");
 
-        console.log("> [video-robot] Convert to .mp4");
+        console.log("> [video-robot] Converting video to .mp4");
         hbjs
           .spawn({
             input: destinationFilePath,
@@ -201,14 +202,14 @@ async function robot() {
           })
           .on("complete", progress => {
             console.log("> [video-robot] Encoding finished successfully");
-            //remove big MOV file
+            //remove big original file
             fs.unlinkSync(destinationFilePath, err => {
               if (err) {
                 console.error(
-                  `> [video-robot] Error removing .mov file: ${err}`
+                  `> [video-robot] Error removing original file: ${err}`
                 );
               }
-              console.log(`> [video-robot] output.MOV removed.`);
+              console.log(`> [video-robot] Original file removed.`);
             });
             resolve();
           });
