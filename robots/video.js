@@ -1,4 +1,6 @@
 const gm = require("gm").subClass({ imageMagick: true });
+const hbjs = require("handbrake-js");
+const fs = require("fs");
 const state = require("./state");
 const spawn = require("child_process").spawn;
 const path = require("path");
@@ -150,8 +152,22 @@ async function robot() {
     return new Promise((resolve, reject) => {
       const aerenderFilePath =
         "C:/Program Files/Adobe/Adobe After Effects CC 2019/Support Files/aerender.exe";
-      const templateFilePath = `${rootPath}/templates/1/template.aep`;
-      const destinationFilePath = `${rootPath}/content/output.mov`;
+      const templateFilePath = path.resolve(
+        rootPath,
+        "templates",
+        "1",
+        "template.aep"
+      );
+      const destinationFilePath = path.resolve(
+        rootPath,
+        "content",
+        "output.avi"
+      );
+      const destinationFilePathConverted = path.resolve(
+        rootPath,
+        "content",
+        "output.mp4"
+      );
 
       console.log("> Starting After Effects");
 
@@ -170,7 +186,32 @@ async function robot() {
 
       aerender.on("close", () => {
         console.log("> After Effects closed");
-        resolve();
+
+        console.log("> [video-robot] Convert to .mp4");
+        hbjs
+          .spawn({
+            input: destinationFilePath,
+            output: destinationFilePathConverted
+          })
+          .on("error", err => {
+            // invalid user input, no video found etc
+            console.error(
+              `> [video-robot] Error found while trying to convert video: ${err}`
+            );
+          })
+          .on("complete", progress => {
+            console.log("> [video-robot] Encoding finished successfully");
+            //remove big MOV file
+            fs.unlinkSync(destinationFilePath, err => {
+              if (err) {
+                console.error(
+                  `> [video-robot] Error removing .mov file: ${err}`
+                );
+              }
+              console.log(`> [video-robot] output.MOV removed.`);
+            });
+            resolve();
+          });
       });
     });
   }
